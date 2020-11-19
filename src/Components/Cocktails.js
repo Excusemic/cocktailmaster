@@ -21,8 +21,8 @@ const Cocktails = () => {
   if (searchMode) {
     return data.drinks ? (
       <div className="cocktails-content">
-        {data.drinks.map((elem) => {
-          return <SingleCocktail {...elem} key={elem.idDrink} />
+        {data.drinks.map((elem, index) => {
+          return <SingleCocktail {...elem} key={index} />
         })}
       </div>
     ) : (

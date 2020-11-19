@@ -24,7 +24,7 @@ export const AppContextProvider = ({ children }) => {
     if (isList) {
       dispatch({ type: "GLOBAL_STATE_UPDATE_TO_LIST", payload: initialState })
     }
-  }, [initialState])
+  }, [initialState, searchTerm])
 
   const searchCocktails = (param) => {
     setSearchTerm({ ...searchTerm, searchText: param, listSearch: "s", searchList: "search" })
@@ -46,6 +46,10 @@ export const AppContextProvider = ({ children }) => {
       isText: true,
       isList: false,
     })
+  }
+  const resetSearchMode = () => {
+    console.log("asd")
+    dispatch({ type: "RESET_SEARCH_MODE" })
   }
   const changeSearchMethod = (val, filterName, listFilter) => {
     if (filterName !== "listByFilter") {
@@ -87,6 +91,7 @@ export const AppContextProvider = ({ children }) => {
         searchTerm,
         resetData,
         randomCocktail,
+        resetSearchMode,
       }}
     >
       {children}

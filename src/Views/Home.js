@@ -1,5 +1,4 @@
 import React from "react"
-import Form from "../Components/Form"
 import Cocktails from "../Components/Cocktails"
 
 const Home = () => {

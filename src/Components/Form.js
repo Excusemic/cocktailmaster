@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react"
 import { useGlobalContext } from "../context"
+import { Switch, Route } from "react-router-dom"
 
 const Form = () => {
   const inputContainer = useRef("")
@@ -19,50 +20,58 @@ const Form = () => {
   }
   useEffect(() => {
     if (searchMode) {
+      setShowSeach(true)
       selectContainer.current.value = "name"
     }
   }, [searchMode])
-  useEffect(() => {
-    inputContainer.current.focus()
-  }, [inputContainer])
+  useEffect(() => {}, [inputContainer])
   return (
-    <div className="form-wrapper">
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div className="label-wrapper">
-          <label htmlFor="cocktail">Search </label>
-          <select
-            name="by"
-            id="by"
-            onChange={(e) => handleChange(e.target.value)}
-            ref={selectContainer}
-          >
-            <option default value="name">
-              by name
-            </option>
-            <option value="c">by category</option>
-            <option value="g">by glass</option>
-          </select>
-        </div>
+    <Route exact path="/">
+      <div className="form-wrapper">
+        <Switch>
+          <Route path="/cocktail/:id">
+            <div></div>
+          </Route>
+          <Route path="/" exact>
+            <form onSubmit={(e) => e.preventDefault()}>
+              <div className="label-wrapper">
+                <label htmlFor="cocktail">Search </label>
+                <select
+                  name="by"
+                  id="by"
+                  onChange={(e) => handleChange(e.target.value)}
+                  ref={selectContainer}
+                >
+                  <option default value="name">
+                    by name
+                  </option>
+                  <option value="c">by category</option>
+                  <option value="g">by glass</option>
+                </select>
+              </div>
 
-        {showSearch || selectContainer.current.value === "name" ? (
-          <input
-            type="text"
-            name="cocktail"
-            ref={inputContainer}
-            onChange={() => searchCocktails(inputContainer.current.value)}
-          />
-        ) : null}
-        {searchList === "filter" ? (
-          <div className="breadcrumb-container">
-            <span onClick={() => handleChange(breadcrumb.listFilter)}>
-              {breadcrumb.listFilter === "g" ? "Glass" : "Category"}
-            </span>
-            <span> / </span>
-            <span>{breadcrumb.val}</span>
-          </div>
-        ) : null}
-      </form>
-    </div>
+              {showSearch ? (
+                <input
+                  type="text"
+                  name="cocktail"
+                  ref={inputContainer}
+                  onChange={() => searchCocktails(inputContainer.current.value)}
+                />
+              ) : null}
+              {searchList === "filter" ? (
+                <div className="breadcrumb-container">
+                  <span onClick={() => handleChange(breadcrumb.listFilter)}>
+                    {breadcrumb.listFilter === "g" ? "Glass" : "Category"}
+                  </span>
+                  <span> / </span>
+                  <span>{breadcrumb.val}</span>
+                </div>
+              ) : null}
+            </form>
+          </Route>
+        </Switch>
+      </div>
+    </Route>
   )
 }
 
