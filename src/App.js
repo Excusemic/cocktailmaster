@@ -1,6 +1,7 @@
 import React from "react"
 import Cocktail from "./Views/Cocktail"
 import Home from "./Views/Home"
+import About from "./Views/About"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navbar from "./Components/Navbar"
 
@@ -14,6 +15,9 @@ function App() {
         </Route>
         <Route path="/cocktail/:id">
           <Cocktail />
+        </Route>
+        <Route path="/about">
+          <About />
         </Route>
       </Switch>
     </Router>

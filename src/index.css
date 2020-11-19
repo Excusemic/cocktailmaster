@@ -22,8 +22,9 @@ code {
   align-items: center;
 }
 .not-found {
+  margin-top: 3em;
   text-align: center;
-  color: #383838;
+  color: #494949;
 }
 .home-content {
   width: 80%;
@@ -32,8 +33,6 @@ code {
 .home-content form {
   width: 60%;
   border-radius: 6px;
-  display: flex;
-  flex-wrap: wrap;
   text-align: center;
   justify-content: center;
   margin: 2em auto;
@@ -43,16 +42,45 @@ code {
   -webkit-box-shadow: -2px 7px 10px -4px rgba(0, 0, 0, 0.74);
   box-shadow: -2px 7px 10px -4px rgba(0, 0, 0, 0.74);
 }
-.home-content form label {
-  font-weight: bold;
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-wrapper {
+  margin: 1em 0em;
+}
+.home-content form h6 {
+  display: inline-block;
+  font-weight: normal;
   font-size: 1.2em;
 }
-.home-content form input {
+.home-content form span {
+  display: inline-block;
+  margin-left: 0.3em;
+}
+
+form select {
+  width: auto;
+  color: rgb(117, 191, 255);
+  border: none;
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: underline;
+}
+form label {
+  font-size: 1.2em;
+  margin-right: 0.1em;
+}
+form input {
   font-size: 1em;
   border-radius: 6px;
   padding: 0.3em;
   border: 1px solid black;
-  margin-left: 0.6em;
+}
+.label-wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 .cocktails-content {
   display: flex;
@@ -79,6 +107,10 @@ code {
 }
 .single-cocktail .image-container {
   overflow: hidden;
+}
+.single-cocktail .image-container img {
+  transition: 0.2s ease-in-out;
+  height: 400px;
 }
 .single-cocktail:hover img {
   transform: scale(1.1);
@@ -132,8 +164,13 @@ code {
   color: rgb(115, 190, 255);
 }
 nav {
+  position: sticky;
+  z-index: 5;
+  top: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   padding: 1em 10%;
   color: rgb(115, 190, 255);
   background-color: rgb(255, 255, 255);
@@ -146,19 +183,38 @@ nav a {
 }
 nav h2 {
   font-size: 2em;
+  margin-right: 1em;
 }
 nav ul {
+  text-align: right;
   text-decoration: none;
   list-style-type: none;
+  display: flex;
+  align-items: center;
 }
 nav ul li {
   display: inline-block;
   vertical-align: sub;
   margin: auto 1.2em;
+  margin-left: 0em;
 }
 nav ul li a {
   text-decoration: none;
   color: rgb(115, 190, 255);
+}
+.randomCocktail {
+  background-color: #fff;
+  border: 1px solid rgb(115, 190, 255);
+  color: rgb(115, 190, 255);
+  font-size: 1em;
+  border-radius: 6px;
+  padding: 0.1em 0.2em;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.randomCocktail:hover {
+  background-color: rgb(115, 190, 255);
+  color: #fff;
 }
 .drink-page-content {
   width: 80%;
@@ -207,6 +263,49 @@ nav ul li a {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.category-card-container {
+  margin-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.category-card {
+  width: 200px;
+  padding: 1.2em 0em;
+  margin: 0.6em 0.6em;
+  border: none;
+  color: #fff;
+  background-color: rgb(115, 190, 255);
+  text-align: center;
+  border-radius: 6px;
+  font-size: 1.3em;
+  -webkit-box-shadow: -2px 3px 16px -4px rgba(0, 0, 0, 0.83);
+  box-shadow: -2px 3px 16px -4px rgba(0, 0, 0, 0.83);
+  font-weight: bold;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.category-card:hover {
+  -webkit-box-shadow: -2px 3px 16px -2px rgba(0, 0, 0, 0.83);
+  box-shadow: -2px 3px 16px -2px rgba(0, 0, 0, 0.83);
+}
+.breadcrumb-container {
+  display: block;
+}
+.breadcrumb-container span {
+  cursor: pointer;
+}
+.breadcrumb-container span:nth-child(1) {
+  transition: 0.2s ease-in-out;
+  text-decoration: underline;
+}
+.breadcrumb-container span:nth-child(1):hover {
+  color: #969dfc;
+}
+.about {
+  width: 80%;
+  margin: 2em auto;
 }
 @media screen and (min-width: 320px) and (max-width: 650px) {
   .home-content form {

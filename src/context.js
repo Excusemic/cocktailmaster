@@ -5,20 +5,93 @@ import { reducer } from "./reducer"
 const AppContext = React.createContext()
 
 export const AppContextProvider = ({ children }) => {
-  const [searchTerm, setSearchTerm] = useState("a")
-  const initialState = useFetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`
-  )
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [searchTerm, setSearchTerm] = useState({
+    searchText: "a",
+    searchList: "search",
+    listSearch: "s",
+    isText: true,
+    isList: false,
+  })
+  let url = `https://www.thecocktaildb.com/api/json/v1/1/${searchTerm.searchList}.php?${searchTerm.listSearch}=${searchTerm.searchText}`
+  const initialState = useFetch(url, searchTerm)
+  const [state, dispatch] = useReducer(reducer, { ...initialState, searchMode: true })
 
   useEffect(() => {
-    dispatch({ type: "GLOBAL_STATE_UPDATE", payload: initialState })
+    const { isText, isList } = searchTerm
+    if (isText) {
+      dispatch({ type: "GLOBAL_STATE_UPDATE_TO_SEARCH", payload: initialState })
+    }
+    if (isList) {
+      dispatch({ type: "GLOBAL_STATE_UPDATE_TO_LIST", payload: initialState })
+    }
   }, [initialState])
 
   const searchCocktails = (param) => {
-    setSearchTerm(param)
+    setSearchTerm({ ...searchTerm, searchText: param, listSearch: "s", searchList: "search" })
   }
-  return <AppContext.Provider value={{ ...state, searchCocktails }}>{children}</AppContext.Provider>
+  const resetData = () => {
+    setSearchTerm({
+      searchText: "a",
+      searchList: "search",
+      listSearch: "s",
+      isText: true,
+      isList: false,
+    })
+  }
+  const randomCocktail = () => {
+    setSearchTerm({
+      searchText: "",
+      searchList: "random",
+      listSearch: "",
+      isText: true,
+      isList: false,
+    })
+  }
+  const changeSearchMethod = (val, filterName, listFilter) => {
+    if (filterName !== "listByFilter") {
+      if (val !== "name") {
+        setSearchTerm({
+          searchList: "list",
+          listSearch: val,
+          searchText: "list",
+          isText: false,
+          isList: true,
+        })
+      } else {
+        setSearchTerm({
+          searchList: "search",
+          listSearch: "s",
+          searchText: "a",
+          isText: true,
+          isList: false,
+        })
+      }
+    } else {
+      let filteredVal = val.split(" ").join("_")
+      setSearchTerm({
+        breadCrumb: { listFilter, val },
+        searchList: "filter",
+        listSearch: listFilter,
+        searchText: filteredVal,
+        isText: false,
+        isList: true,
+      })
+    }
+  }
+  return (
+    <AppContext.Provider
+      value={{
+        ...state,
+        searchCocktails,
+        changeSearchMethod,
+        searchTerm,
+        resetData,
+        randomCocktail,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  )
 }
 export const useGlobalContext = () => {
   return useContext(AppContext)

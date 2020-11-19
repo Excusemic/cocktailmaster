@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export const useFetch = (url) => {
+export const useFetch = (url, searchTerm) => {
   const [response, setResponse] = useState({ data: null, loading: true, error: false })
   const sendRequest = async (url) => {
     setResponse({ data: null, loading: true, error: false })
@@ -21,6 +21,6 @@ export const useFetch = (url) => {
         setResponse({ data: null, loading: false, error: true })
         console.log(error)
       })
-  }, [url])
+  }, [url, searchTerm])
   return response
 }

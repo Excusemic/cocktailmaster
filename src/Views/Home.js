@@ -5,7 +5,6 @@ import Cocktails from "../Components/Cocktails"
 const Home = () => {
   return (
     <div className="home-content">
-      <Form />
       <Cocktails />
     </div>
   )
