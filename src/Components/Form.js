@@ -35,7 +35,6 @@ const Form = () => {
           <Route path="/" exact>
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="label-wrapper">
-                <label htmlFor="cocktail">Search </label>
                 <select
                   name="by"
                   id="by"
