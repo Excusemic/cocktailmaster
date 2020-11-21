@@ -48,7 +48,6 @@ export const AppContextProvider = ({ children }) => {
     })
   }
   const resetSearchMode = () => {
-    console.log("asd")
     dispatch({ type: "RESET_SEARCH_MODE" })
   }
   const changeSearchMethod = (val, filterName, listFilter) => {

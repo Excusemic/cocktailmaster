@@ -31,7 +31,7 @@ const Cocktails = () => {
   } else {
     switch (listPrintMode) {
       case "list":
-        if (listType === "g") {
+        if (listType === "g" && data.drinks) {
           return (
             <div className="category-card-container">
               {data.drinks.map((elem, index) => {
@@ -47,7 +47,7 @@ const Cocktails = () => {
               })}
             </div>
           )
-        } else if (listType === "c") {
+        } else if (listType === "c" && data.drinks) {
           return (
             <div className="category-card-container">
               {data.drinks.map((elem, index) => {
