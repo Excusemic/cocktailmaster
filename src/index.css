@@ -300,13 +300,15 @@ nav ul li a {
   .home-content form {
     width: 90%;
   }
-
+  .cocktails-content {
+    margin-top: 2em;
+  }
   .home-content form input {
     margin-top: 2em;
   }
   nav {
     justify-content: flex-start;
-    padding: 0em 2%;
+    padding: 1em 2%;
     padding-bottom: 0.6em;
   }
   nav h2 {
